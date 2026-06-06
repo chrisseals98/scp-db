@@ -1,0 +1,42 @@
+name: Convert JSON to SQLite DB
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/scp-db.yml
+
+permissions:
+  contents: write
+
+jobs:
+    convert-json:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: "Clone the JSON"
+              uses: actions/checkout@v6
+              with:
+                repository: scp-data/scp-api
+                ref: "main"
+                path: scp-api
+
+            - name: Set up Python
+              uses: actions/setup-python@v6
+
+            - name: Convert JSON to SQLite DB
+              run: |
+                python create_db.py
+
+            - name: Commit and push changes
+              run: |
+                git config --global user.name "GitHub Actions"
+                git config --global user.email ""
+                git add scp.db
+                git commit -m "Update SCP DB"
+                git push
