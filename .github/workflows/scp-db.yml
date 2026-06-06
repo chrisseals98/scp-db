@@ -2,7 +2,7 @@ name: Convert JSON to SQLite DB
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 12 1 * 0"
   push:
     branches:
       - main

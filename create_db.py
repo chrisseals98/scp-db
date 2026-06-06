@@ -364,7 +364,7 @@ def load_json(path: Path) -> dict:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Convert SCP JSON files to an SQLite database.')
-    parser.add_argument('--source', default='../scp-api/docs/data/scp/', help='Source root for SCP JSON data. Required')
+    parser.add_argument('--source', default='scp-api/docs/data/scp/', help='Source root for SCP JSON data. Required')
     parser.add_argument('--output', default='scp.db', help='Output SQLite database file. Default: ./scp_data.db')
     args = parser.parse_args()
 
