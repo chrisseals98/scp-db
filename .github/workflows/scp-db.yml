@@ -1,42 +1,44 @@
-name: Convert JSON to SQLite DB
+# DISABLED AS I DO NOT HAVE THE SPACE TO SAVE THE DB ON GITHUB ANYMORE. RUN LOCALLY TO GET DATA IN SQLITE DATABASE.
 
-on:
-  schedule:
-    - cron: "0 12 1 * 0"
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/scp-db.yml
+# name: Convert JSON to SQLite DB
 
-permissions:
-  contents: write
+# on:
+#   schedule:
+#     - cron: "0 12 1 * 0"
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - .github/workflows/scp-db.yml
 
-jobs:
-    convert-json:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v3
+# permissions:
+#   contents: write
 
-            - name: "Clone the JSON"
-              uses: actions/checkout@v6
-              with:
-                repository: scp-data/scp-api
-                ref: "main"
-                path: scp-api
+# jobs:
+#     convert-json:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - name: Checkout repository
+#               uses: actions/checkout@v3
 
-            - name: Set up Python
-              uses: actions/setup-python@v6
+#             - name: "Clone the JSON"
+#               uses: actions/checkout@v6
+#               with:
+#                 repository: scp-data/scp-api
+#                 ref: "main"
+#                 path: scp-api
 
-            - name: Convert JSON to SQLite DB
-              run: |
-                python create_db.py
+#             - name: Set up Python
+#               uses: actions/setup-python@v6
 
-            - name: Commit and push changes
-              run: |
-                git config --global user.name "GitHub Actions"
-                git config --global user.email ""
-                git add scp.db
-                git commit -m "Update SCP DB"
-                git push
+#             - name: Convert JSON to SQLite DB
+#               run: |
+#                 python create_db.py
+
+#             - name: Commit and push changes
+#               run: |
+#                 git config --global user.name "GitHub Actions"
+#                 git config --global user.email ""
+#                 git add scp.db
+#                 git commit -m "Update SCP DB"
+#                 git push
